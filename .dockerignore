@@ -1,0 +1,13 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.log
+.env
+venv
+.venv
+.dist
+.git
+.avito-2025-pr_reviews
+Dockerfile.dev
+docker-compose.dev.yml

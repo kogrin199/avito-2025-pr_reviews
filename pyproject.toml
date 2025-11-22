@@ -1,0 +1,10 @@
+[project]
+name = "avito-2025-pr-reviews"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[all]>=0.121.3",
+    "uvicorn>=0.38.0",
+]
