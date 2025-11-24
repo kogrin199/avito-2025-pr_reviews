@@ -11,6 +11,8 @@ anyio==4.11.0
     #   httpx
     #   starlette
     #   watchfiles
+asyncpg==0.30.0
+    # via avito-2025-pr-reviews (pyproject.toml)
 certifi==2025.11.12
     # via
     #   httpcore
