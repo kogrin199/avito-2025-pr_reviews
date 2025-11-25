@@ -5,11 +5,11 @@ Revises:
 Create Date: 2025-11-24 19:05:02.713991
 
 """
-from typing import Sequence, Union
+from collections.abc import Sequence
+from typing import Union
 
 from alembic import op
 import sqlalchemy as sa
-
 
 # revision identifiers, used by Alembic.
 revision: str = '240cc67a558b'
@@ -40,8 +40,8 @@ def upgrade() -> None:
     sa.Column('pull_request_name', sa.String(), nullable=False),
     sa.Column('author_id', sa.String(), nullable=True),
     sa.Column('status', sa.Enum('OPEN', 'MERGED', name='prstatus'), nullable=True),
-    sa.Column('createdAt', sa.DateTime(), nullable=True),
-    sa.Column('mergedAt', sa.DateTime(), nullable=True),
+    sa.Column('createdAt', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('mergedAt', sa.DateTime(timezone=True), nullable=True),
     sa.ForeignKeyConstraint(['author_id'], ['users.user_id'], ),
     sa.PrimaryKeyConstraint('pull_request_id')
     )
