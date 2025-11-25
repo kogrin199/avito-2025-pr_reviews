@@ -1,5 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
+from sqlalchemy.orm import selectinload
 
 from app.models.models import PullRequest, PullRequestReviewer
 
@@ -11,6 +12,17 @@ class PRRepository:
     async def get_pr(self, pr_id: str) -> PullRequest | None:
         result = await self.db.execute(
             select(PullRequest).where(PullRequest.pull_request_id == pr_id)
+        )
+        return result.scalar_one_or_none()
+
+    async def get_pr_with_reviewers(self, pr_id: str) -> PullRequest | None:
+        """
+        Get PR with loaded reviewers
+        """
+        result = await self.db.execute(
+            select(PullRequest)
+            .options(selectinload(PullRequest.reviewers))
+            .where(PullRequest.pull_request_id == pr_id)
         )
         return result.scalar_one_or_none()
 

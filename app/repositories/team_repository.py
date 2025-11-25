@@ -1,5 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
+from sqlalchemy.orm import selectinload
 
 from app.models.models import Team, User
 
@@ -9,7 +10,9 @@ class TeamRepository:
         self.db = db
 
     async def get_team(self, team_name: str) -> Team | None:
-        result = await self.db.execute(select(Team).where(Team.team_name == team_name))
+        result = await self.db.execute(
+            select(Team).options(selectinload(Team.members)).where(Team.team_name == team_name)
+        )
         return result.scalar_one_or_none()
 
     async def add_team(self, team_name: str, members: list[dict]) -> Team:
@@ -25,5 +28,8 @@ class TeamRepository:
             )
             self.db.add(user)
         await self.db.commit()
-        await self.db.refresh(team)
-        return team
+        # Refresh и загрузить members
+        result = await self.db.execute(
+            select(Team).options(selectinload(Team.members)).where(Team.team_name == team_name)
+        )
+        return result.scalar_one()
