@@ -8,11 +8,11 @@
 4. Корректная работа с asyncpg (NullPool для избежания проблем с event loop)
 """
 
-import os
 from collections.abc import AsyncGenerator
+import os
 
-import pytest
 from httpx import ASGITransport, AsyncClient
+import pytest
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.pool import NullPool, StaticPool
 
