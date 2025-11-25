@@ -8,15 +8,16 @@
 
 ## Быстрый старт
 
-* Легче всего запустить с пакетным менеджером [uv](https://docs.astral.sh/uv/)
+* Легче всего запустить с пакетным менеджером [uv](https://docs.astral.sh/uv/) + Docker Compose
 
 ```shell
 uv sync
-make migrate
-make run
+docker-compose up -d --build
+# Сервис доступен на http://localhost:8080
+# Swagger UI: http://localhost:8080/docs
 ```
 
-* локально, `uv` установлен:
+* можно запустить локально, если `uv` установлен:
 
 ```shell
 uv venv # создание .venv/
@@ -123,6 +124,10 @@ make test-pg
 # С отчётом покрытия
 make test-cov
 ```
+
+**Примечание:**
+
+Обычные тесты запускаются в SQLite в памяти (через aiosqlite) - команда `make test` и `make test-cov`, а `make test-pg` и `make test-pg-cov` запускают эти же тести в postgreSQL.
 
 ---
 
