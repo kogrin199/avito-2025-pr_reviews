@@ -4,8 +4,9 @@ import enum
 
 from sqlalchemy import Boolean, Column, DateTime, Enum, ForeignKey, String
 from sqlalchemy.orm import declarative_base, relationship
+from sqlalchemy.orm.decl_api import DeclarativeBase
 
-Base = declarative_base()
+Base: DeclarativeBase = declarative_base()
 
 
 class PRStatus(enum.Enum):
