@@ -8,8 +8,22 @@ wheels/
 
 # Virtual environments
 .venv
+venv/
 
+# Hide environment variables
 .env
 
+# dev environment files
 Dockerfile.dev
 docker-compose.dev.yml
+
+# IDE files
+.vscode/*
+!.vscode/settings.json
+.idea/
+
+# Testing and linting caches
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+
